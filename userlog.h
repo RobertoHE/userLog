@@ -74,8 +74,21 @@ typedef enum DEBUGMODES
 /********************************************************************************/
 /*							FUNCIONES DEL MODULO								*/
 /********************************************************************************/
+///@brief Inicializa logs. Usar antes de userlog o logcmd 
+///@param mode Selecciona uno de los posibles modos de mostrar los mensajes. Se puede modificar en tiempo de vuelo enviando una senal sighup.
 void initlog(debugModes_t mode);
+
+///@brief Funcion para crear mensajes
+///@param priority Definidos en syslog.h -> LOG_EMERG, LOG_ALERT, LOG_CRIT, LOG_ERR, LOG_WARNING, LOG_NOTICE, LOG_INFO, LOG_DEBUG
+///@param format Formato de entrada similar a printf().
+///@return Devuelve el numero de caracteres escritos 
 int userlog(unsigned int priority, const char *format, ...);
+
+///@brief Funcion para crear mensajes de cmd recibido.
+///@param datar	Booleano para indicar si se quiere incluir la fecha o no.
+///@param lf Booleano para indicar si se quiere anadir un retorno de linea tras el cmd.
+///@param format Formato de entrada similar a printf().
+///@return Devuelve el numero de caracteres escritos.
 int logcmd(unsigned char datar, unsigned char lf, const char *format, ...);
 
 #endif // _LOG_H_
